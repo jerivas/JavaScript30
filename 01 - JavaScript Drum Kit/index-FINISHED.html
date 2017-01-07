@@ -59,8 +59,8 @@
 
 <script>
   function removeTransition(e) {
-    if (e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing');
+    const key = document.querySelector(`.key[data-key="${e.target.dataset.key}"]`);
+    key.classList.remove('playing');
   }
 
   function playSound(e) {
@@ -73,9 +73,8 @@
     audio.play();
   }
 
-  const keys = Array.from(document.querySelectorAll('.key'));
-  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  window.addEventListener('keydown', playSound);
+  const audios = Array.from(document.querySelectorAll('audio'));
+  audios.forEach(audio => audio.addEventListener('ended', removeTransition));
 </script>
 
 
